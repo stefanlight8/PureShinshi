@@ -1,0 +1,27 @@
+bot:
+  description: "Shinshi - это современный и удобный Discord-бот, разработанный для предоставления вам и вашим серверам отличных функций и стабильной работы."
+
+  links:
+    - name: 'Сервер поддержки'
+      url: 'https://discord.gg/3bXW7an2ke'
+
+nodes:
+  - name: 'Titania'
+    host: '127.0.0.1'
+    port: 5000
+    password: 'stefanlight'
+
+icons:
+  about: 'https://media.discordapp.net/attachments/1158576566306082907/1158576589160845433/icon_about.png'
+
+  errors:
+    default: 'https://media.discordapp.net/attachments/1158573134669156382/1158576561621053590/icon_error.png'
+
+  user:
+    member: 'https://media.discordapp.net/attachments/1137770725713907772/1137770825894871111/user.png'
+    bot: 'https://media.discordapp.net/attachments/1137770725713907772/1137770825387360346/bot.png'
+
+  status:
+    good: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078334578818/icon_status_good.png'
+    middle: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078548492348/icon_status_middle.png'
+    bad: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078057742457/icon_status_bad.png'
