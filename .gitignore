@@ -6,6 +6,7 @@
 !.vscode/*.code-snippets
 .history/
 *.vsix
+.idea
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/**/usage.statistics.xml
@@ -101,3 +102,4 @@ oscrypto-ca-bundle.crt
 bh_unicode_properties.cache
 GitHub.sublime-settings
 design
+_music

@@ -6,15 +6,16 @@ from miru.view import View
 from bot import Plugin
 
 plugin = Plugin()
-SUPPORT_LINK = "https://discord.gg/3bXW7an2ke"
 
 
 @plugin.include
 @command(name="support", description="Сервер поддержки")
 class Command:
 
-    @staticmethod
-    async def callback(context: Context) -> None:
+    async def callback(self, context: Context) -> None:
+        view: View = View()
+        view.add_item(Button(label="Сервер поддержки", url=context.client.model.config['support_link']))
+
         await context.respond(
-            components=View().add_item(Button(label="Сервер поддержки", url=SUPPORT_LINK))
+            components=view
         )

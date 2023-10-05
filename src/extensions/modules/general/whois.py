@@ -70,16 +70,18 @@ class Command:
                     )
                 )
             except InternalServerError:
+                _view = View()
+                _view.add_item(Button(label='Страница статуса Discord', url='https://discordstatus.com/'))
+
                 return await context.respond(
                     embed=embeds.error(
                         'Ошибка Discord API',
                         description='Ошибка на стороне Discord, ничего поделать не можем.'
                     ),
-                    components=View().add_item(Button(label='Страница статуса Discord',
-                                                      url='https://discordstatus.com/'))
+                    components=_view
                 )
 
-        icon_of = client.config['icons']['type_of_user']
+        icon_of = client.config['icons']['member']
 
         embed: Embed = embeds.default(
             title=user.global_name if user.global_name else user.username,
@@ -95,7 +97,7 @@ class Command:
                   f"(<t:{round(user.created_at.timestamp())}:D>)"
         )
 
-        _embeds: [Embed] = [
+        _embeds: list[Embed] = [
             embed
         ]
 

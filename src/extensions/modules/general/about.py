@@ -31,11 +31,13 @@ class Command:
         bot: GatewayBot = cast(GatewayBot, context.app)
         config: dict = context.client.model.config
         users_count: int = sum(guild.member_count for guild in bot.cache.get_guilds_view().values())
+
         embed: Embed = embeds.default(
             title=f'Про {bot.get_me().username}',
             icon_url=config['icons']['about'],
             description=config['bot']['description']
         )
+
         embed.set_thumbnail(bot.get_me().avatar_url)
         embed.add_field(
             name='Основная информация',

@@ -1,5 +1,7 @@
+from asyncio import get_running_loop
 from logging import getLogger, Logger
 
+from aiohttp import ClientSession
 from crescent.plugin import Plugin as BasePlugin
 from hikari.events import (
     StartingEvent,
@@ -12,6 +14,7 @@ from hikari.events import (
 from hikari.impl import GatewayBot
 from hikari.presences import Status, Activity, ActivityType
 
+__all__ = ['BotModel', 'Plugin']
 _log: Logger = getLogger(__name__)
 
 
@@ -19,14 +22,15 @@ class BotModel:
     """
     Base model of a bot.
     """
-    __slots__ = ['_bot', 'database', 'node_pool', 'config']
+    __slots__ = ['_bot', 'session', 'database', 'node_pool', 'config']
 
     def __init__(self, bot: GatewayBot, **kwargs) -> None:
         self._bot: GatewayBot = bot
 
-        self.database: None = kwargs.get('database', None)
-        self.node_pool: None = kwargs.get('node_pool', None)
-        self.config: dict = kwargs.get('config', None)
+        self.session: ClientSession | None = None
+        self.database: None = kwargs.get('database')
+        self.node_pool: None = kwargs.get('node_pool')
+        self.config: dict = kwargs.get('config')
 
         events = {
             StartingEvent: self.on_starting,
@@ -61,8 +65,8 @@ class BotModel:
     async def on_starting(_: StartingEvent) -> None:
         _log.info("Bot is starting...")
 
-    @staticmethod
-    async def on_start(_: StartedEvent) -> None:
+    async def on_start(self, _: StartedEvent) -> None:
+        self.session = ClientSession(loop=get_running_loop())
         _log.info("Bot is started successfully")
 
     @staticmethod
@@ -102,4 +106,3 @@ class BotModel:
 
 
 Plugin = BasePlugin[GatewayBot, BotModel]
-__all__ = ['BotModel', 'Plugin']

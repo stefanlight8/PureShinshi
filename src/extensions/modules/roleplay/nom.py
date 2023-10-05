@@ -15,6 +15,15 @@ async def check_hook(context: Context) -> HookResult:
     bot: GatewayBot = cast(GatewayBot, context.app)
     target: User = context.options['user']
 
+    if context.member.id == target.id:
+        await context.respond(
+            embed=embeds.error(
+                'Таким образом не получится',
+                'Вы просто можете проигнорировать аргумент `member` и вы покушаете самостоятельно'
+            )
+        )
+        return HookResult(exit=True)
+
     if target.is_bot:
         if target.id == bot.get_me().id:
             return HookResult(exit=False)
@@ -39,6 +48,7 @@ class Command:
     async def callback(self, context: Context) -> None:
         api: WaifuPicsAdapter = WaifuPicsAdapter()
         target: User = self.user
+        session = context.client.model.session
 
         if self.user:
             await context.respond(
@@ -46,7 +56,7 @@ class Command:
                     title=f'{context.member.username} покормил {target.username}',
                     icon_url=context.member.display_avatar_url.url,
                     description=self.message
-                ).set_image(await api.get_gif('nom'))
+                ).set_image(await api.get_gif(session, 'nom'))
             )
         else:
             await context.respond(

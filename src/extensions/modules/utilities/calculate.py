@@ -6,7 +6,6 @@ from crescent.ext.cooldowns import cooldown
 
 from bot import Plugin
 from ext import embeds
-from ext.api import Request
 
 plugin = Plugin()
 
@@ -19,22 +18,16 @@ class Command:
 
     async def callback(self, context: Context) -> None:
         try:
-            response = await Request.json(
-                method='POST',
-                url='https://api.mathjs.org/v4/',
-                headers={
-                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) "
-                                  "Gecko/20100101 Firefox/118.0",
-                    "Accept": "*/*",
-                    "Accept-Language": "en-US,en;q=0.5",
-                    "Content-Type": "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "Pragma": "no-cache",
-                    "Cache-Control": "no-cache"
-                },
-                json={"expr": str(self.expression)}
-            )
-        except Exception as exception:
+            async with context.client.model.session.request(
+                    'POST',
+                    url='https://api.mathjs.org/v4/',
+                    headers={
+                        "Content-Type": "application/json"
+                    },
+                    json={"expr": str(self.expression)}
+            ) as response:
+                response = await response.json()
+        except (Exception,):
             return await context.respond(
                 embed=embeds.error(
                     title="Ошибка калькулятора",

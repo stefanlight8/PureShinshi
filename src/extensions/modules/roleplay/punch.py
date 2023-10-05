@@ -11,7 +11,7 @@ plugin = Plugin()
 async def check_hook(context: Context) -> HookResult:
     target: User = context.options['user']
 
-    if context.member.user == target:
+    if context.member.id == target.id:
         await context.respond(embed=embeds.error('Вы не можете ударить самого себя'), ephemeral=True)
         return HookResult(exit=True)
 
@@ -33,11 +33,12 @@ class Command:
     async def callback(self, context: Context) -> None:
         api: WaifuPicsAdapter = WaifuPicsAdapter()
         target: User = self.user
+        session = context.client.model.session
 
         await context.respond(
             embed=embeds.default(
                 title=f'{context.member.username} ударил {target.username}',
                 icon_url=context.member.display_avatar_url.url,
                 description=self.message
-            ).set_image(await api.get_gif('kick'))
+            ).set_image(await api.get_gif(session, 'kick'))
         )

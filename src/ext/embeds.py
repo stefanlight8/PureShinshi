@@ -2,6 +2,8 @@ from hikari.embeds import Embed
 
 from __main__ import config
 
+__all__ = ['default', 'error']
+
 
 def default(
         title: str = None,
@@ -29,6 +31,3 @@ def error(
         title=title, icon_url=icon_url, description=description, colour=colour, **kwargs
     )
     return embed
-
-
-__all__ = ['default', 'error']

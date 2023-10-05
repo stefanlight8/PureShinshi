@@ -5,12 +5,22 @@ from crescent.context import Context
 from hikari.impl import GatewayBot
 from miru.button import Button
 from miru.view import View
+from yarl import URL
 
 from bot import Plugin
 
 plugin = Plugin()
-INVITE_LINK: str = ("https://discord.com/oauth2/authorize"
-                    "?client_id={client_id}&scope={scopes}&permissions={permissions}")
+
+
+def create_discord_auth_link(client_id: int | str, scope: list, permissions: int) -> str:
+    base_url = "https://discord.com/oauth2/authorize"
+    query_params = {
+        "client_id": client_id,
+        "scope": '+'.join(scope),
+        "permissions": permissions
+    }
+    url = URL(base_url).with_query(query_params)
+    return str(url)
 
 
 @plugin.include
@@ -25,17 +35,13 @@ class Command:
         view.add_item(
             Button(
                 label="С правами администратора",
-                url=INVITE_LINK.format(
-                    client_id=bot.get_me().id, scopes="bot+applications.commands", permissions=8
-                ),
+                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications_commands'], 8),
             )
         )
         view.add_item(
             Button(
                 label="Без прав",
-                url=INVITE_LINK.format(
-                    client_id=bot.get_me().id, scopes="bot+applications.commands", permissions=0
-                ),
+                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications_commands'], 0),
             )
         )
 

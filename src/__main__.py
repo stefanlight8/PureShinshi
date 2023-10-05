@@ -32,9 +32,9 @@ if __name__ == "__main__":
         base_bot: GatewayBot = GatewayBot(
             token=DISCORD_TOKEN,
             intents=Intents.GUILDS
-            | Intents.GUILD_EMOJIS
-            | Intents.GUILD_MESSAGES
-            | Intents.GUILD_VOICE_STATES,
+                    | Intents.GUILD_EMOJIS
+                    | Intents.GUILD_MESSAGES
+                    | Intents.GUILD_VOICE_STATES,
             logs='DEBUG'
         )
 

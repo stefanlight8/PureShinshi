@@ -1,5 +1,7 @@
 from yaml import load, CLoader
 
+__all__ = ['ConfigurationFile']
+
 
 class ConfigurationFile:
     def __init__(self, config_path: str) -> None:
@@ -12,6 +14,3 @@ class ConfigurationFile:
 
     def get_config(self) -> dict:
         return self.config
-
-
-__all__ = ['ConfigurationFile']
