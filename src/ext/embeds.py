@@ -1,4 +1,4 @@
-from hikari.embeds import Embed
+from hikari import Embed
 
 from __main__ import config
 

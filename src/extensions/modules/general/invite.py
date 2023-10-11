@@ -2,9 +2,8 @@ from typing import cast
 
 from crescent.commands import command
 from crescent.context import Context
-from hikari.impl import GatewayBot
-from miru.button import Button
-from miru.view import View
+from hikari import GatewayBot
+from miru import Button, View
 from yarl import URL
 
 from bot import Plugin
@@ -16,7 +15,7 @@ def create_discord_auth_link(client_id: int | str, scope: list, permissions: int
     base_url = "https://discord.com/oauth2/authorize"
     query_params = {
         "client_id": client_id,
-        "scope": '+'.join(scope),
+        "scope": ' '.join(scope),
         "permissions": permissions
     }
     url = URL(base_url).with_query(query_params)
@@ -27,21 +26,20 @@ def create_discord_auth_link(client_id: int | str, scope: list, permissions: int
 @command(name="invite", description="Пригласить бота")
 class Command:
 
-    @staticmethod
-    async def callback(context: Context) -> None:
+    async def callback(self, context: Context) -> None:  # type: ignore
         bot: GatewayBot = cast(GatewayBot, context.app)
         view: View = View()
 
         view.add_item(
             Button(
                 label="С правами администратора",
-                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications_commands'], 8),
+                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications.commands'], 8),
             )
         )
         view.add_item(
             Button(
                 label="Без прав",
-                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications_commands'], 0),
+                url=create_discord_auth_link(bot.get_me().id, ['bot', 'applications.commands'], 0),
             )
         )
 

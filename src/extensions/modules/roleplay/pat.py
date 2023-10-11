@@ -1,9 +1,10 @@
+from datetime import timedelta
 from typing import cast
 
 from crescent.commands import command, option, HookResult, hook
 from crescent.context import Context
-from hikari import User
-from hikari.impl import GatewayBot
+from crescent.ext.cooldowns import cooldown
+from hikari import User, GatewayBot
 
 from bot import Plugin
 from ext import WaifuPicsAdapter, embeds
@@ -35,6 +36,7 @@ async def check_hook(context: Context) -> HookResult:
 
 @plugin.include
 @hook(check_hook)
+@hook(cooldown(3, timedelta(seconds=10)))
 @command(name="pat", description="Погладить", dm_enabled=False)
 class Command:
     user: User = option(User, description="Кого вы хотите погладить")

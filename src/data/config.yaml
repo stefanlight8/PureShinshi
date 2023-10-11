@@ -1,9 +1,9 @@
 bot:
-  description: "Shinshi - это современный и удобный Discord-бот, разработанный для предоставления вам и вашим серверам отличных функций и стабильной работы."
+  description: 'Shinshi - это современный и удобный Discord-бот, разработанный для предоставления вам и вашим серверам отличных функций и стабильной работы.'
 
   links:
     - name: 'Сервер поддержки'
-      url: 'https://discord.gg/3bXW7an2ke'
+      url: https://discord.gg/3bXW7an2ke
 
 nodes:
   - name: 'Titania'
@@ -12,16 +12,61 @@ nodes:
     password: 'stefanlight'
 
 icons:
-  about: 'https://media.discordapp.net/attachments/1158576566306082907/1158576589160845433/icon_about.png'
+  about: https://media.discordapp.net/attachments/1158576566306082907/1159896615922958336/icon_about.png
+  calculate: https://media.discordapp.net/attachments/1160078718623027252/1160078752336846898/icon_calculator.png
+  moderate: https://media.discordapp.net/attachments/1160611861499232367/1160611891098431538/icon_moderate_success.png
 
   errors:
-    default: 'https://media.discordapp.net/attachments/1158573134669156382/1158576561621053590/icon_error.png'
+    default: https://media.discordapp.net/attachments/1158573134669156382/1159896580447555624/icon_error.png
+    calculate: https://media.discordapp.net/attachments/1158573134669156382/1160079738061213716/icon_error_calculator.png
+    moderate: https://media.discordapp.net/attachments/1158573134669156382/1160611838808043581/icon_error_moderate.png
 
   user:
-    member: 'https://media.discordapp.net/attachments/1137770725713907772/1137770825894871111/user.png'
-    bot: 'https://media.discordapp.net/attachments/1137770725713907772/1137770825387360346/bot.png'
+    member: https://cdn.discordapp.com/attachments/1159880365020827799/1159896660235792394/icon_user_member.png
+    bot: https://media.discordapp.net/attachments/1159880365020827799/1159896659904430080/icon_user_bot.png
 
   status:
-    good: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078334578818/icon_status_good.png'
-    middle: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078548492348/icon_status_middle.png'
-    bad: 'https://media.discordapp.net/attachments/1158582042976596059/1158582078057742457/icon_status_bad.png'
+    good: https://cdn.discordapp.com/attachments/1158582042976596059/1159896710202536108/icon_status_good.png
+    middle: https://cdn.discordapp.com/attachments/1158582042976596059/1159896710408061039/icon_status_middle.png
+    bad: https://cdn.discordapp.com/attachments/1158582042976596059/1159896709976051903/icon_status_bad.png
+
+  guild:
+    partner: https://cdn.discordapp.com/attachments/1160082730038591488/1160084182391848960/partner_guild.png
+    verified: https://cdn.discordapp.com/attachments/1160082730038591488/1160084182828077167/verefied_guild.png
+    community:
+      default: https://cdn.discordapp.com/attachments/1160082730038591488/1160084181632692325/default_community_guild.png
+      boosted: https://cdn.discordapp.com/attachments/1160082730038591488/1160084180810608640/boosted_community_guild.png
+
+    public:
+      default: https://cdn.discordapp.com/attachments/1160082730038591488/1160084182115045376/default_public_guild.png
+      boosted: https://cdn.discordapp.com/attachments/1160082730038591488/1160084181183889509/boosted_public_guild.png
+
+  weather:
+    01d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082887413080137/weather_01d.png
+    02d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082887631192147/weather_02d.png
+    03d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082887870271559/weather_03d.png
+    04d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082888193220638/weather_04d.png
+    09d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082888470052864/weather_09d.png
+    10d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082888793018459/weather_10d.png
+    11d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082889061441596/weather_11d.png
+    13d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082889321496576/weather_13d.png
+    50d: https://cdn.discordapp.com/attachments/1160082721192812564/1160082889573158992/weather_50d.png
+
+    01n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082943096668210/weather_01n.png
+    02n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082943394447431/weather_02n.png
+    03n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082943629332540/weather_03n.png
+    04n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082943990038658/weather_04n.png
+    09n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082944380112986/weather_09n.png
+    10n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082944635977778/weather_10n.png
+    11n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082944900202546/weather_11n.png
+    13n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082945122504755/weather_13n.png
+    50n: https://cdn.discordapp.com/attachments/1160082721192812564/1160082945399341128/weather_50n.png
+
+emojis:
+  links:
+    boticord: 1159902346755715143
+    vk: 1159902357291794503
+    git: 1159902352891973672
+    telegram: 1159902355282743377
+    donate: 1159902351239418016
+    custom: 1159902348823511071

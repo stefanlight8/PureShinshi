@@ -2,9 +2,8 @@ from typing import cast
 
 from crescent.commands import command
 from crescent.context import Context
-from hikari.embeds import Embed
-from hikari.impl import GatewayBot
-from humanize.filesize import naturalsize
+from hikari import Embed, GatewayBot
+from humanize import naturalsize
 from psutil import Process
 
 from bot import Plugin

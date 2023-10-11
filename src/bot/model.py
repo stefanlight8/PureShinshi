@@ -2,7 +2,8 @@ from asyncio import get_running_loop
 from logging import getLogger, Logger
 
 from aiohttp import ClientSession
-from crescent.plugin import Plugin as BasePlugin
+from crescent import Plugin as BasePlugin
+from hikari import GatewayBot, Status, Activity, ActivityType
 from hikari.events import (
     StartingEvent,
     StartedEvent,
@@ -11,25 +12,19 @@ from hikari.events import (
     StoppingEvent,
     StoppedEvent
 )
-from hikari.impl import GatewayBot
-from hikari.presences import Status, Activity, ActivityType
 
 __all__ = ['BotModel', 'Plugin']
 _log: Logger = getLogger(__name__)
 
 
 class BotModel:
-    """
-    Base model of a bot.
-    """
-    __slots__ = ['_bot', 'session', 'database', 'node_pool', 'config']
+    __slots__ = ['_bot', 'session', 'database', 'node_pool', 'config', 'lavalink']
 
     def __init__(self, bot: GatewayBot, **kwargs) -> None:
         self._bot: GatewayBot = bot
 
         self.session: ClientSession | None = None
         self.database: None = kwargs.get('database')
-        self.node_pool: None = kwargs.get('node_pool')
         self.config: dict = kwargs.get('config')
 
         events = {
@@ -43,23 +38,6 @@ class BotModel:
 
         for event, callback in events.items():
             bot.subscribe(event, callback)
-
-    def init_music_nodes(self, user_id) -> None:
-        if self.node_pool:
-            _log.debug('Initializing music nodes...')
-            for node_data in self.config['nodes']:
-                node = self.node_pool.create_node(
-                    host=node_data['host'],
-                    port=node_data['port'],
-                    password=node_data['password'],
-                    user_id=user_id,
-                    name=node_data['name']
-                )
-                node.connect()
-
-            _log.info('Initialized music nodes!')
-        else:
-            _log.warning("Node pool is none")
 
     @staticmethod
     async def on_starting(_: StartingEvent) -> None:
@@ -81,8 +59,6 @@ class BotModel:
             ),
         )
         _log.info(f"Shard is ready (ID {event.shard.id})")
-
-        self.init_music_nodes(event.my_user.id)
 
         if self.database:
             self.database.connect()

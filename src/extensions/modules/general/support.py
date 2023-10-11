@@ -1,7 +1,6 @@
 from crescent.commands import command
 from crescent.context import Context
-from miru.button import Button
-from miru.view import View
+from miru import Button, View
 
 from bot import Plugin
 

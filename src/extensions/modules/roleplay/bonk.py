@@ -1,5 +1,8 @@
-from crescent.commands import command, option, HookResult, hook
+from datetime import timedelta
+
+from crescent.commands import HookResult, command, option, hook
 from crescent.context import Context
+from crescent.ext.cooldowns import cooldown
 from hikari import User
 
 from bot import Plugin
@@ -25,6 +28,7 @@ async def check_hook(context: Context) -> HookResult:
 
 @plugin.include
 @hook(check_hook)
+@hook(cooldown(3, timedelta(seconds=10)))
 @command(name="bonk", description="Подзатыльник 😡", dm_enabled=False)
 class Command:
     user: User = option(User, description="Кого вы хотите ударить")

@@ -1,9 +1,10 @@
+from datetime import timedelta
 from typing import cast
 
 from crescent.commands import command, option, HookResult, hook
 from crescent.context import Context
-from hikari import User
-from hikari.impl import GatewayBot
+from crescent.ext.cooldowns import cooldown
+from hikari import User, GatewayBot
 
 from bot import Plugin
 from ext import WaifuPicsAdapter, embeds
@@ -40,6 +41,7 @@ async def check_hook(context: Context) -> HookResult:
 
 @plugin.include
 @hook(check_hook)
+@hook(cooldown(3, timedelta(seconds=10)))
 @command(name="nom", description="Покормить", dm_enabled=False)
 class Command:
     user: User | None = option(User, description="Кого вы хотите покормить", default=None)
@@ -64,5 +66,5 @@ class Command:
                     title=f'{context.member.username} кушает',
                     icon_url=context.member.default_avatar_url.url,
                     description=self.message
-                ).set_image(await api.get_gif('nom'))
+                ).set_image(await api.get_gif(session, 'nom'))
             )
